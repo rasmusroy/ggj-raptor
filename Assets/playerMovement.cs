@@ -6,15 +6,17 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
-    public float baseSpeed = 4.0f;
+    private float baseSpeed;
     public float speed = 1f;
     private float translation;
-    private float straffe;
+    private float strafe;
 
     Rigidbody m_Rigidbody;
 
     void Start()
     {
+        baseSpeed = GameManager.baseSpeed;
+
         m_Rigidbody = GetComponent<Rigidbody>();
 
         m_Rigidbody.velocity = Vector3.forward * baseSpeed;
@@ -23,7 +25,7 @@ public class playerMovement : MonoBehaviour
     void Update()
     {
         translation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        straffe = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        transform.Translate(straffe, 0, translation);
+        strafe = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        transform.Translate(strafe, 0, translation);
     }
 }
