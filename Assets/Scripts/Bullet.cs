@@ -18,12 +18,17 @@ public class Bullet : MonoBehaviour
         m_Rigidbody.velocity = Vector3.forward * (baseSpeed + bulletSpeed);
 
         // Bullet is destroyed after 5 sec to clean up.
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider collider)
     {
         
+        if (collider.tag == "Enemy")
+        {
+            Debug.Log("hit enemy");
+            Destroy(gameObject);
+        }
     }
 
 }
