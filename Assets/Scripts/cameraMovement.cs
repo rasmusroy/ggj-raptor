@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class cameraMovement : MonoBehaviour
 {
-    private float baseSpeed;
-    
     Rigidbody m_Rigidbody;
-    float m_Speed;
+
+    float baseSpeed;
 
     void Start()
     {
@@ -17,9 +16,7 @@ public class cameraMovement : MonoBehaviour
 
         m_Rigidbody = GetComponent<Rigidbody>();
 
-        m_Speed = baseSpeed;
-
-        m_Rigidbody.velocity = Vector3.forward * m_Speed;
+        m_Rigidbody.velocity = Vector3.forward * baseSpeed;
     }
 
     void Update()
