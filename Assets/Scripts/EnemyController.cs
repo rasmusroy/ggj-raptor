@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private HealthSystem healthSystem = new HealthSystem(10);
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        other.GetComponent<Bullet>().OnBulletDamageEvent += Bullet_OnBulletDamageEvent;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Bullet_OnBulletDamageEvent(int bulletDamage)
     {
-        
+        healthSystem.Damage(bulletDamage);
+        Debug.Log(healthSystem.GetHealth());
+        if (healthSystem.GetHealth() <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
+
 }

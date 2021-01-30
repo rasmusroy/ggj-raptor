@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         strafe = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         transform.Translate(strafe, 0, translation);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             OnFireBulletEvent?.Invoke(bulletSpawn);
         }

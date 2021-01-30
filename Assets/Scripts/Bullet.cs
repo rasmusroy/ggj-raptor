@@ -8,6 +8,10 @@ public class Bullet : MonoBehaviour
     float baseSpeed;
     Rigidbody m_Rigidbody;
     [SerializeField] public float bulletSpeed;
+    [SerializeField] public int bulletDamage;
+
+    public event OnBulletDamageDelegate OnBulletDamageEvent;
+    public delegate void OnBulletDamageDelegate(int bulletDamage);
 
     void Start()
     {
@@ -21,13 +25,13 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider other)
     {
         
-        if (collider.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
-            Debug.Log("hit enemy");
-            Destroy(gameObject);
+            OnBulletDamageEvent?.Invoke(bulletDamage);
+            Destroy(gameObject, 0.1f);
         }
     }
 
